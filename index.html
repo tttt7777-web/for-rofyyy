@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background:linear-gradient(-45deg,#6dd5ed,#2193b0,#74ebd5,#ACB6E5);
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+    padding:20px;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.card{
+
+width:100%;
+max-width:420px;
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(15px);
+border-radius:25px;
+padding:35px 25px;
+text-align:center;
+color:white;
+box-shadow:0 15px 40px rgba(0,0,0,.25);
+animation:cardAppear .8s ease, floatCard 4s ease-in-out infinite;
+position:relative;
+z-index:2;
+
+}
+
+@keyframes cardAppear{
+
+from{
+opacity:0;
+transform:translateY(40px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+@keyframes floatCard{
+
+0%,100%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+}
+
+.icon{
+
+font-size:65px;
+margin-bottom:15px;
+animation:bounce 2s infinite;
+
+}
+
+@keyframes bounce{
+
+0%,100%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-12px);
+}
+
+}
+
+h1{
+
+margin-bottom:15px;
+font-size:2rem;
+
+}
+
+p{
+
+line-height:1.8;
+font-size:1rem;
+opacity:.95;
+
+}
+
+button{
+
+margin-top:30px;
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:white;
+color:#2193b0;
+font-weight:bold;
+font-size:17px;
+cursor:pointer;
+transition:.3s;
+animation:pulse 2s infinite;
+
+}
+
+button:hover{
+
+transform:scale(1.04);
+
+}
+
+@keyframes pulse{
+
+0%,100%{
+box-shadow:0 0 0 rgba(255,255,255,.4);
+}
+
+50%{
+box-shadow:0 0 20px rgba(255,255,255,.7);
+}
+
+}
+
+#reply{
+
+margin-top:25px;
+display:none;
+font-size:20px;
+font-weight:bold;
+animation:fade .8s;
+
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:translateY(15px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+.circle{
+
+position:absolute;
+border-radius:50%;
+background:rgba(255,255,255,.18);
+animation:rise linear infinite;
+z-index:1;
+
+}
+
+@keyframes rise{
+
+from{
+
+transform:translateY(100vh);
+
+}
+
+to{
+
+transform:translateY(-120vh);
+
+}
+
+}
+
+@media(max-width:500px){
+
+.card{
+
+padding:30px 20px;
+
+}
+
+h1{
+
+font-size:1.8rem;
+
+}
+
+p{
+
+font-size:.95rem;
+
+}
+
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+<div class="icon">🙂</div>
+
+<h1> 🌹وردة اعتذار عما بضر مني </h1>
+
+<p id="text"></p>
+
+<button onclick="accept()">
+click if u accept the apology
+</button>
+
+<div id="reply">
+Thank you. I really appreciate it. 💙
+وحياة امك متحرقيش الماتش 
+</div>
+
+</div>
+
+<script>
+
+const message="this site is created specifically for rofy القائد الشامخ القدوة الطيبة اللي هتسامحني ومش هتحرق الماتش ان شاء الله عشان طيبة .im sorry please accept the apology ";
+
+let i=0;
+
+function type(){
+
+if(i<message.length){
+
+document.getElementById("text").innerHTML+=message.charAt(i);
+
+i++;
+
+setTimeout(type,28);
+
+}
+
+}
+
+type();
+
+// Floating bubbles
+
+function bubble(){
+
+const b=document.createElement("div");
+
+b.className="circle";
+
+const size=Math.random()*25+10;
+
+b.style.width=size+"px";
+b.style.height=size+"px";
+
+b.style.left=Math.random()*100+"vw";
+
+b.style.animationDuration=(8+Math.random()*8)+"s";
+
+document.body.appendChild(b);
+
+setTimeout(()=>{
+
+b.remove();
+
+},17000);
+
+}
+
+setInterval(bubble,350);
+
+// Confetti
+
+function explode(){
+
+confetti({
+particleCount:200,
+spread:100,
+origin:{y:.6}
+});
+
+setTimeout(()=>{
+
+confetti({
+particleCount:120,
+angle:60,
+spread:80,
+origin:{x:0}
+});
+
+confetti({
+particleCount:120,
+angle:120,
+spread:80,
+origin:{x:1}
+});
+
+},300);
+
+}
+
+function accept(){
+
+explode();
+
+document.getElementById("reply").style.display="block";
+
+}
+
+window.onload=()=>{
+
+setTimeout(explode,400);
+
+}
+
+</script>
+
+</body>
+</html>
